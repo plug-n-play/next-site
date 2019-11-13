@@ -1,13 +1,33 @@
 {
   "version": 2,
-  "alias": "nextjs.org",
-  "scope": "next-js",
-  "builds": [{ "src": "www/next.config.js", "use": "@now/next@canary" }],
+  "env": {
+    "ROOT_URL": "https://nextjs.org",
+    "ACCESS_TOKEN_SECRET": "@next-learn-access-token-secret",
+    "GITHUB_CLIENT_ID": "@next-learn-github-client-id",
+    "GITHUB_CLIENT_SECRET": "@next-learn-github-client-secret",
+    "AIRTABLE_API_KEY": "@airtable_key"
+  },
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/next@canary"
+    }
+  ],
   "routes": [
     {
       "src": "/learn/?",
       "status": 301,
       "headers": { "Location": "/learn/basics/getting-started" }
+    },
+    {
+      "src": "/learn/basics/server-side-support-for-clean-urls/?",
+      "status": 301,
+      "headers": { "Location": "/learn/basics/clean-urls-with-dynamic-routing" }
+    },
+    {
+      "src": "/learn/excel/automatic-prerendering/?",
+      "status": 301,
+      "headers": { "Location": "/learn/excel/automatic-static-optimization" }
     },
     {
       "src": "/features/?",
@@ -27,13 +47,8 @@
       }
     },
     {
-      "src": "/showcase/(?<item>[^/]*)",
-      "dest": "/www/showcase?item=$item"
-    },
-    {
       "src": "/feed.xml",
-      "dest": "/www/_next/static/feed.xml"
-    },
-    { "src": "(.*)", "dest": "/www$1" }
+      "dest": "/_next/static/feed.xml"
+    }
   ]
 }
