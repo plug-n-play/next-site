@@ -1,0 +1,76 @@
+import Layout from '../../../../components/learn/Layout';
+
+export const meta = {
+  title: 'creating-quotes-api',
+  courseId: 'basics',
+  lessonId: 'api-routes',
+  stepId: 'creating-quotes-api'
+};
+
+## Creating Quotes API
+
+Congratulations. You have successfully created your first API in Next.js
+
+In the previous step, we created a basic API and opened the response in the browser. Now lets alter the API to get an array of quotes.
+
+In the example codebase, we have a file named `7.2-api-routes/quotes.js` containing an array of quotes.
+
+Lets use it inside `pages/api/randomQuote/index.js` and return a random quote from the API:
+
+```bash
+import { quotes } from '../../../quotes'
+
+export default (req, res) => {
+  const randomQuote = quotes[ Math.floor(Math.random()*quotes.length) ]
+  res.status(200).json( randomQuote )
+}
+```
+
+Now let's consume this API in `pages/index.js`
+
+```bash
+import useFetch from '../utils/useFetch'
+
+const Index = () => {
+  const { data, error } = useFetch('/api/randomQuote')
+
+  if ( !data || !data.quote || error ) {
+    return <div>Loading...</div>
+  }
+
+  return (
+    <main className="center">
+      <div className="quote">
+        {data && data.quote}
+      </div>
+      <span className="author"> - {data && data.author} </span>
+
+      <style jsx>{`
+        main {
+          width: 90%;
+          max-width: 900px;
+          margin: 300px auto;
+          text-align: center;
+        }
+        .quote {
+          font-family: cursive;
+          color: #E243DE;
+          font-size: 24px;
+          padding-bottom: 10px;
+        }
+        .author {
+          font-family: sans-serif;
+          color: #559834;
+          font-size: 20px;
+        }
+      `}</style>
+    </main>
+  )
+}
+
+export default Index
+```
+
+Observe that on each refresh, we get a new quote rendered on the screen
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>;

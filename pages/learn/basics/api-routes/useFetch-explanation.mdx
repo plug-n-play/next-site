@@ -1,0 +1,42 @@
+import Layout from '../../../../components/learn/Layout';
+
+export const meta = {
+  title: 'useFetch Explanation',
+  courseId: 'basics',
+  lessonId: 'api-routes',
+  stepId: 'useFetch-explanation'
+};
+
+## useFetch Custom Hook:
+
+In the previous step, we used a custom hook `utils/useFetch.js`
+
+```bash
+import React, { useState, useEffect } from 'react'
+
+const useFetch = (url, options) => {
+  const [data, setData] = React.useState(null);
+  const [error, setError] = React.useState(null);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(url, options);
+        const json = await res.json();
+        debugger
+        setData(json);
+      } catch (error) {
+        setError(error);
+      }
+    };
+    fetchData();
+  }, []);
+  return { data, error };
+};
+
+export default useFetch
+```
+
+This custom hook expects a url as input, makes an http call to the url and returns the data received from the url as output, else returns an error in case there is any.
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>;

@@ -1,0 +1,18 @@
+import Layout from '../../../../components/learn/Layout';
+
+export const meta = {
+  title: 'Finally',
+  courseId: 'basics',
+  lessonId: 'api-routes',
+  stepId: 'finally'
+};
+
+In this lesson we learned that apart from creating front-end code in a NextJS App, we can also create APIs in the same mono-repo.
+
+The collacation of both APIs and front-end logic in the same codebase is extremely powerful and gives an excellent developer experience.
+
+In this example, we had created hard-coded data in the same codebase. Additionally, we can fetch the data from a remote database as well.
+
+Let's learn about deploying Next.js apps.
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>;
