@@ -36,6 +36,7 @@ class LogoContainer extends React.PureComponent {
   };
 
   render() {
+    const { isAmp } = this.props;
     const { scroll, mounted } = this.state;
 
     // const LOGO_TOP = isMobile ? 126 : 170;
@@ -43,13 +44,17 @@ class LogoContainer extends React.PureComponent {
     return (
       <div
         className={classNames('logo-main f4 fw6', { unmounted: !mounted })}
-        style={{
-          top: Math.max(LOGO_TOP - scroll, 7),
-          opacity: `${Math.max(easing(1 - scroll / LOGO_TOP), 0)}`,
-          transform: `scale(${Math.max(easing(1 - scroll / LOGO_TOP), 0) * 0.325 +
-            0.625}) translate3d(0, 0, 0)`,
-          transformOrigin: 'top'
-        }}
+        style={
+          isAmp
+            ? {}
+            : {
+                top: Math.max(LOGO_TOP - scroll, 7),
+                opacity: `${Math.max(easing(1 - scroll / LOGO_TOP), 0)}`,
+                transform: `scale(${Math.max(easing(1 - scroll / LOGO_TOP), 0) * 0.325 +
+                  0.625}) translate3d(0, 0, 0)`,
+                transformOrigin: 'top'
+              }
+        }
       >
         <Link href="/">
           <a className={scroll >= LOGO_TOP ? null : 'disable'} aria-label="Next.js">
@@ -81,7 +86,7 @@ class LogoContainer extends React.PureComponent {
           }
           .logo-main {
             display: flex;
-            position: fixed;
+            position: ${isAmp ? 'relative' : 'fixed'};
             justify-content: center;
             color: #0070f3;
             left: 0;
@@ -94,6 +99,7 @@ class LogoContainer extends React.PureComponent {
             // margin-left: -0.2rem;
             margin-top: 0.4rem;
             cursor: pointer;
+            display: ${isAmp ? 'none' : 'inherit'};
           }
           .version.hide {
             opacity: 0;
@@ -106,7 +112,7 @@ class LogoContainer extends React.PureComponent {
             white-space: nowrap;
           }
           .unmounted {
-            display: none;
+            display: ${isAmp ? 'inherit' : 'none'};
           }
         `}</style>
       </div>
@@ -204,7 +210,7 @@ export default class extends React.PureComponent {
                 }
               }
             `}</style>
-            {!isAmp && <LogoContainer />}
+            <LogoContainer isAmp={isAmp} />
             <div className="campaign no-drag no-tap-highlight">
               <h1 className={classNames('title-1', 'fw6')}>The React Framework for</h1>
               <h2 className={classNames('title-2', 'fw7')}>

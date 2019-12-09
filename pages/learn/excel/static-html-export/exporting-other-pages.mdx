@@ -21,12 +21,13 @@ export const meta = {
 
 Now, let's try to export all the other pages as well.
 
-For that, add the following content to the `next.config.js` file:
+For that, replace the content of `next.config.js` with the following:
 
 ```js
 const fetch = require('isomorphic-unfetch');
 
 module.exports = {
+  exportTrailingSlash: true,
   exportPathMap: async function() {
     const paths = {
       '/': { page: '/' },
