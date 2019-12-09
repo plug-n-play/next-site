@@ -25,6 +25,7 @@ First of all, create a file called `next.config.js` in the root of your app and 
 
 ```js
 module.exports = {
+  exportTrailingSlash: true,
   exportPathMap: function() {
     return {
       '/': { page: '/' }
