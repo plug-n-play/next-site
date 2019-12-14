@@ -29,14 +29,15 @@ export default (req, res) => {
 Now let's consume this API in `pages/index.js`
 
 ```bash
-import useFetch from '../utils/useFetch'
+import useSWR from 'swr'
+
+const fetcher = url => fetch(url).then(r => r.json())
 
 const Index = () => {
-  const { data, error } = useFetch('/api/randomQuote')
+  const { data, error } = useSWR('/api/randomQuote', fetcher)
 
-  if ( !data || !data.quote || error ) {
-    return <div>Loading...</div>
-  }
+  if (error) return <div>failed to load</div>
+  if (!data) return <div>loading...</div>
 
   return (
     <main className="center">
@@ -71,6 +72,6 @@ const Index = () => {
 export default Index
 ```
 
-Observe that on each refresh, we get a new quote rendered on the screen
+Observe that on each refresh, we get a new quote rendered on the screen. We used a packange named `swr`. SWR is a React Hooks library for remote data fetching. For more details check [swr.now.sh](https://swr.now.sh).
 
 export default ({ children }) => <Layout meta={meta}>{children}</Layout>;
