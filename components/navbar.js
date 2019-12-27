@@ -138,7 +138,7 @@ function Navbar({ className, hideLogo, route, isMobile }) {
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <GitHubLogo />
+                <GitHubLogo id="githublogofooter" />
               </a>
               <a
                 href={links.spectrum}

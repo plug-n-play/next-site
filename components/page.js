@@ -159,10 +159,10 @@ function Page({ title, description, children }) {
             font-weight: 900;
           }
           .subtitle {
-            color: #717171;
+            color: #696969;
           }
           .mute {
-            color: #757575;
+            color: #696969;
           }
           .tc {
             text-align: center;

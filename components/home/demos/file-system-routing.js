@@ -1,50 +1,7 @@
-import Code from './code';
 import withSlot from './slot';
-
-const IndexFile = () => (
-  <Code>{`import Link from 'next/link'
-
-export default function Index() {
-  return (
-    <div>
-      <h1>Hello Next.js 👋</h1>
-      <Link href='/about'><a>About</a></Link>
-    </div>
-  )
-}
-`}</Code>
-);
-
-const AboutFile = () => (
-  <Code>{`import Link from 'next/link'
-
-export default function About() {
-  return (
-    <div>
-      <p>This is the about page</p>
-      <Link href='/'><a>Go home</a></Link>
-    </div>
-  )
-}
-`}</Code>
-);
-
-const PackageFile = () => (
-  <Code lang="json">{`{
-  "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start",
-    "export": "next export"
-  },
-  "dependencies": {
-    "next": "^8.0.0",
-    "react": "^16.5.1",
-    "react-dom": "^16.5.1"
-  }
-}
-`}</Code>
-);
+import PackageFile from './file-system-routing/package-file.mdx';
+import IndexFile from './file-system-routing/index-file.mdx';
+import AboutFile from './file-system-routing/about-file.mdx';
 
 const IndexPage = withSlot(({ A }) => (
   <div>
@@ -86,12 +43,10 @@ export default {
   note: (
     <>
       <p>
-        Next.js will serve each file in <code>/pages</code> under a pathname
-        matching the filename.
+        Next.js will serve each file in <code>/pages</code> under a pathname matching the filename.
       </p>
       <p>
-        For example, <code>/pages/about.js</code> is served at{' '}
-        <code>site.com/about</code>.
+        For example, <code>/pages/about.js</code> is served at <code>site.com/about</code>.
       </p>
     </>
   )

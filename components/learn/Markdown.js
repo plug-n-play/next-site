@@ -1,12 +1,5 @@
 import React from 'react';
 import { MDXProvider } from '@mdx-js/tag';
-// import dynamic from 'next/dynamic';
-
-// const Highlight = dynamic(import('react-highlight'), {
-//   // Here we don't show any loading component.
-//   // But instead, we'll show the markdown content without syntax-highlight
-//   loading: ({ children }) => <div dangerouslySetInnerHTML={{ __html: children }} />
-// });
 
 const A = ({ children, ...props }) => (
   <a target="_blank" rel="noopener noreferrer" {...props}>

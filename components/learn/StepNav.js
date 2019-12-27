@@ -1,6 +1,4 @@
 import React from 'react';
-import { useHasUser } from '../../lib/learn/user';
-import { login } from '../../lib/learn/actions';
 import RightArrow from '../icons/arrow-right';
 import LeftArrow from '../icons/arrow-left';
 import LongRightArrow from '../icons/arrow-right-long';
@@ -22,21 +20,8 @@ const Icon = ({ left, right, children }) => (
 );
 
 const StepNav = ({ steps, nextLessonId, meta: { stepId, courseId, lessonId } }) => {
-  const hasUser = useHasUser();
-
   if (!steps.length) {
     return null;
-  }
-
-  if (!stepId && !hasUser) {
-    return (
-      <Button invert onClick={login}>
-        Login & Start
-        <Icon right>
-          <LongRightArrow color="white" />
-        </Icon>
-      </Button>
-    );
   }
 
   // intro step

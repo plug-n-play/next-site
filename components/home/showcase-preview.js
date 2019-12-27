@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useAmp } from 'next/amp';
 import { sortedByAlexa } from '../../showcase-manifest';
+import Image from './../image';
 
 // length should be odd numbers
 const DATA = sortedByAlexa.slice(0, 7);
@@ -10,19 +11,6 @@ const imgHeight = 185;
 const margin = 30;
 
 export default () => {
-  const isAmp = useAmp();
-  const Img = props =>
-    React.createElement(isAmp ? 'amp-img' : 'img', {
-      ...props,
-      ...(isAmp
-        ? {
-            className: undefined
-          }
-        : {
-            height: undefined,
-            width: undefined
-          })
-    });
   return (
     <>
       <div className="showcase-container tablet">
@@ -72,7 +60,8 @@ export default () => {
           {DATA.map(item => {
             return (
               <div className="slide" key={`thumbnail-${item.internalUrl}`}>
-                <Img
+                <Image
+                  margin={0}
                   src={item.src.replace('/showcases/', '/showcase-thumbnails/')}
                   alt={`Showcase ${item.title}`}
                   height={imgHeight}
@@ -177,7 +166,8 @@ export default () => {
                       30}px, ${top}px, 0)`
                   }}
                 >
-                  <Img
+                  <Image
+                    margin={0}
                     className="no-drag"
                     src={item.src.replace('/showcases/', '/showcase-thumbnails/')}
                     style={{

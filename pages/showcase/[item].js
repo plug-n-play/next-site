@@ -1,9 +1,9 @@
 import { mapping } from '../../showcase-manifest';
 import Showcase from './index';
 
-export async function unstable_getStaticParams() {
+export async function unstable_getStaticPaths() {
   return Object.keys(mapping).map(key => {
-    return { item: key };
+    return { params: { item: key } };
   });
 }
 

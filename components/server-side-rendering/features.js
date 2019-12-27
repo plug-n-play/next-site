@@ -3,9 +3,9 @@ import React from 'react';
 import Container from '../container';
 import Browser from '../browser';
 import Terminal from '../static-exporting/terminal/terminal';
-import Code from '../home/demos/code';
 import Checkmark from '../icons/checkmark';
 import Servers from './svg/servers';
+import TerminalCode from './terminal-code.mdx';
 
 const BrowserContent = () => (
   <div className="browser-content">
@@ -22,13 +22,7 @@ const BrowserContent = () => (
         text-align: center;
         display: flex;
         justify-content: center;
-        background-image: radial-gradient(
-          circle,
-          #d7d7d7,
-          #d7d7d7 1px,
-          #fff 1px,
-          #fff
-        );
+        background-image: radial-gradient(circle, #d7d7d7, #d7d7d7 1px, #fff 1px, #fff);
         background-size: 28px 28px;
       }
 
@@ -50,17 +44,6 @@ const browserData = {
     'http://nextjs-site.now.sh': BrowserContent
   }
 };
-
-const TERMINAL_CODE = `import Toast from './react-components/toast'
-
-export default function HomePage() {
-  return (
-    <Toast>
-      This site is
-      <strong>Server Side Rendered</strong>
-    </Toast>
-  )
-}`;
 
 export default () => (
   <Container wide dark center>
@@ -98,7 +81,7 @@ export default () => (
             />
           </svg>
           <Terminal height={256}>
-            <Code style={{ padding: 0 }}>{TERMINAL_CODE}</Code>
+            <TerminalCode />
           </Terminal>
         </div>
         <div className="servers-container">
@@ -177,13 +160,26 @@ export default () => (
         position: relative;
         border-radius: 5px;
         width: 352px;
-        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.48),
-          0px 14px 50px rgba(0, 0, 0, 0.38);
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.48), 0px 14px 50px rgba(0, 0, 0, 0.38);
       }
 
       .terminal-container .line {
         left: unset;
         right: -18.7rem;
+      }
+
+      .terminal-container :global(pre) {
+        margin: 0;
+        white-space: pre-wrap;
+      }
+      .terminal-container :global(.token) {
+        color: #f1f1f1;
+      }
+      .terminal-container :global(.token.tag .token.punctuation) {
+        color: #f1f1f1;
+      }
+      .terminal-container :global(.token.plain-text) {
+        color: #c3c3c3;
       }
 
       @keyframes shift {

@@ -1,46 +1,18 @@
-import Code from './code';
 import withSlot from './slot';
-
-const IndexFile = () => (
-  <Code>{`import Link from 'next/link'
-
-export default () => (
-  <div>
-    <h1>Hello, this is the homepage</h1>
-    <p>I'm only 0.59 KB after gzipped.</p>
-    <Link href='/cowsay'><a>Cowsay</a></Link>
-  </div>
-)
-`}</Code>
-);
-
-const AboutFile = () => (
-  <Code>{`import Link from 'next/link'
-
-// only being loaded on \`/cowsay\`
-import cowsay from 'cowsay-browser'
-
-export default () => <div>
-  <p>This page costs 29.8 KB after gzipped!</p>
-  <pre>
-    {cowsay.say({ text: 'I am a big package!' })}
-  </pre>
-  <Link href='/'><a>Go home</a></Link>
-</div>
-`}</Code>
-);
+import IndexFile from './code-splitting/index-file.mdx';
+import AboutFile from './code-splitting/cowsay-file.mdx';
 
 const IndexPage = withSlot(({ A }) => (
   <div>
     <h1>Hello, this is the homepage</h1>
-    <p>{`I'm only 0.59 KB after gzipped.`}</p>
+    <p>{`I'm only 0.59 KB after gzip.`}</p>
     <A tab="http://localhost:3000/cowsay">Cowsay</A>
   </div>
 ));
 
 const AboutPage = withSlot(({ A }) => (
   <div>
-    <p>This page costs 29.8 KB after gzipped!</p>
+    <p>This page costs 29.8 KB after gzip!</p>
     <pre>{` _____________________
 < I am a big package! >
  ---------------------
@@ -73,8 +45,8 @@ export default {
   note: (
     <>
       <p>
-        Every <code>import</code> you declare gets bundled and served with each
-        page. That means pages never load unnecessary code!
+        Every <code>import</code> you declare gets bundled and served with each page. That means
+        pages never load unnecessary code!
       </p>
     </>
   )

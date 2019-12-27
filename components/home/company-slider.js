@@ -63,44 +63,46 @@ export default function CompanySlider() {
       </BackgroundSlider>
       <div style={{ marginBottom: '1rem' }} />
       <BackgroundSlider duration={50}>
-        <div className="company-logos-container">
-          <div>
-            <Auth0 />
+        {num => (
+          <div className="company-logos-container">
+            <div>
+              <Auth0 />
+            </div>
+            <div>
+              <Tencent />
+            </div>
+            <div>
+              <Jet />
+            </div>
+            <div>
+              <Starbucks />
+            </div>
+            <div>
+              <Docker id={`docker-${num}`} />
+            </div>
+            <div>
+              <Hulu />
+            </div>
+            <div>
+              <Coinbase />
+            </div>
+            <div>
+              <Uber />
+            </div>
+            <div>
+              <Invision />
+            </div>
+            <div>
+              <Trovit />
+            </div>
+            <div>
+              <Binance />
+            </div>
+            <div>
+              <Pling />
+            </div>
           </div>
-          <div>
-            <Tencent />
-          </div>
-          <div>
-            <Jet />
-          </div>
-          <div>
-            <Starbucks />
-          </div>
-          <div>
-            <Docker />
-          </div>
-          <div>
-            <Hulu />
-          </div>
-          <div>
-            <Coinbase />
-          </div>
-          <div>
-            <Uber />
-          </div>
-          <div>
-            <Invision />
-          </div>
-          <div>
-            <Trovit />
-          </div>
-          <div>
-            <Binance />
-          </div>
-          <div>
-            <Pling />
-          </div>
-        </div>
+        )}
       </BackgroundSlider>
 
       <style jsx>{`

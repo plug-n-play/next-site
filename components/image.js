@@ -51,7 +51,7 @@ class Image extends Component {
       <IObserver once onIntersect={this.handleIntersect} rootMargin="20%" disabled={!lazy}>
         <figure
           className={classNames({
-            oversize: width > 650,
+            oversize: width > 650 && oversize,
             float: float && width < 520
           })}
         >

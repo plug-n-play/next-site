@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import { ellipsis } from 'polished';
 
 import { useRecord, useGetRecord } from '../../lib/learn/records';
-import { useHasUser } from '../../lib/learn/user';
 import courses from '../../lib/learn/courses';
 
 import { MediaQueryConsumer } from '../media-query';
@@ -137,8 +136,7 @@ const Course = ({ course, isMobile, meta }) => (
 const Navigation = ({ meta }) => {
   const [dropdown, setDropdown] = React.useState(false);
   const [record, dispatchRecord] = useRecord(meta);
-  const hasUser = useHasUser();
-  const effectDeps = [record.ready, !record.visited, hasUser];
+  const effectDeps = [record.ready, !record.visited];
 
   React.useEffect(() => {
     if (effectDeps.every(dep => dep)) {
