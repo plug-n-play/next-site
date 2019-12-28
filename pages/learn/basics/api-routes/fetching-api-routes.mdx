@@ -28,10 +28,12 @@ And now let's consume our API and display the random quote in a page.
 
 Open `pages/index.js` and replace its content with the following:
 
-```js
+```jsx
 import useSWR from 'swr';
 
-const fetcher = url => fetch(url).then(r => r.json());
+function fetcher(url) {
+  return fetch(url).then(r => r.json());
+}
 
 export default function Index() {
   const { data, error } = useSWR('/api/randomQuote', fetcher);

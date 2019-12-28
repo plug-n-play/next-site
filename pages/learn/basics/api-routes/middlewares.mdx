@@ -1,0 +1,112 @@
+import Layout from '../../../../components/learn/Layout';
+
+export const meta = {
+  title: 'API Routes',
+  courseId: 'basics',
+  lessonId: 'api-routes',
+  stepId: 'middlewares',
+  question: {
+    answers: [
+      'There are quotes from multiple authors.',
+      'Error: Failed to fetch the quote.',
+      'The author is always Unknown.',
+      'The author is always Guillermo Rauch.'
+    ],
+    correctAnswer: 'The author is always Guillermo Rauch.'
+  }
+};
+
+## Middlewares
+
+API routes provide [built in middlewares](https://github.com/zeit/next.js#api-middlewares) which parse the incoming `req`, like `req.query`. Let's enhance our API to read query params and filter results accordingly.
+
+Replace the content of `pages/api/randomQuote.js` with the following:
+
+```js
+import allQuotes from '../../quotes.json';
+
+export default (req, res) => {
+  const { author } = req.query;
+  let quotes = allQuotes;
+
+  if (author) {
+    quotes = quotes.filter(quote => quote.author.toLowerCase().includes(author.toLowerCase()));
+  }
+  if (!quotes.length) {
+    quotes = quotes.filter(quote => quote.author.toLowerCase() === 'unknown');
+  }
+
+  const quote = quotes[Math.floor(Math.random() * quotes.length)];
+
+  res.status(200).json(quote);
+};
+```
+
+The above code reads `author` from the `req.query` object and filters the quotes accordingly. If an author is not found quotes from unknown authors are used.
+
+Now Let's update our page to handle a filter by author. Open `pages/index.js` and replace its content with the following:
+
+```jsx
+import { useRouter } from 'next/router';
+import useSWR from 'swr';
+
+function fetcher(url) {
+  return fetch(url).then(r => r.json());
+}
+
+export default function Index() {
+  const { query } = useRouter();
+  const { data, error } = useSWR(
+    query.author ? `/api/randomQuote?author=${query.author}` : '/api/randomQuote',
+    fetcher
+  );
+  const author = data && data.author;
+  let quote = data && data.quote;
+
+  if (!data) quote = 'Loading...';
+  if (error) quote = 'Failed to fetch the quote.';
+
+  return (
+    <main className="center">
+      <div className="quote">{quote}</div>
+      {author && <span className="author">- {author}</span>}
+
+      <style jsx>{`
+        main {
+          width: 90%;
+          max-width: 900px;
+          margin: 300px auto;
+          text-align: center;
+        }
+        .quote {
+          font-family: cursive;
+          color: #e243de;
+          font-size: 24px;
+          padding-bottom: 10px;
+        }
+        .author {
+          font-family: sans-serif;
+          color: #559834;
+          font-size: 20px;
+        }
+      `}</style>
+    </main>
+  );
+}
+```
+
+Let's focus on the following change:
+
+```jsx
+const { query } = useRouter();
+const { data, error } = useSWR(
+  query.author ? `/api/randomQuote?author=${query.author}` : '/api/randomQuote',
+  fetcher
+);
+```
+
+We're sending the `author` from the `query` object received by the index page (`/`) to the API route, which will then return the filtered quotes.
+
+Now go to http://localhost:3000/?author=rauch and refresh the page multiple times, what can you notice?
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>;
