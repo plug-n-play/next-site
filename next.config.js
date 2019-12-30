@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 const rehypePrism = require('@mapbox/rehype-prism');
 const nextMDX = require('@next/mdx');
 const bundleAnalyzer = require('@next/bundle-analyzer');
@@ -38,14 +37,20 @@ const nextConfig = {
   pageExtensions: ['jsx', 'js', 'ts', 'tsx', 'mdx'],
   experimental: {
     babelMultiThread: true,
+    modern: true,
     granularChunks: true,
     deferScripts: true,
     prefetchPreload: true,
+    catchAllRouting: true,
     rewrites() {
       return [
         {
           source: '/feed.xml',
           destination: '/_next/static/feed.xml'
+        },
+        {
+          source: '/docs{/}?',
+          destination: '/docs/getting-started'
         }
       ];
     },
@@ -80,22 +85,31 @@ const nextConfig = {
           source: '/case-studies{/}?',
           statusCode: 301,
           destination: '/case-studies/hulu'
+        },
+        {
+          source: '/api{/}?',
+          statusCode: 301,
+          destination: '/docs/api-routes/introduction'
+        },
+        {
+          source: '/docs/api{/}?',
+          statusCode: 301,
+          destination: '/docs/api-routes/introduction'
         }
       ];
     }
   },
-  env: {
-    FIRST_COURSE: 'basics',
-    FIRST_LESSON: 'getting-started',
-    SITE_NAME: 'Next.js'
-  },
   webpack: (config, { dev, isServer }) => {
     if (isServer && !dev) {
       const originalEntry = config.entry;
+
       config.entry = async () => {
         const entries = { ...(await originalEntry()) };
-        // This script imports components from the Next app, so it's transpiled to `.next/server/scripts/build-rss.js`
+
+        // These scripts can import components from the app and use ES modules
         entries['./scripts/build-rss.js'] = './scripts/build-rss.js';
+        entries['./scripts/index-docs.js'] = './scripts/index-docs.js';
+
         return entries;
       };
     }

@@ -13,7 +13,7 @@ const Profile = ({ isMobile }) => {
       <div className="namecard f6">
         {points ? (
           <span className="points">
-            <strong className="fw6">{points}</strong>
+            <strong className="fw6">{points} points</strong>
           </span>
         ) : null}
         <style jsx>{`

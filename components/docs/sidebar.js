@@ -140,7 +140,7 @@ export default function Sidebar({ headings, mobile, desktop }) {
             offset={64 + 32}
             height={{
               desktop: 0,
-              mobile: 96
+              mobile: 114
             }}
           >
             <Navbar />
@@ -212,10 +212,6 @@ export default function Sidebar({ headings, mobile, desktop }) {
         }
       `}</style>
       <style jsx global>{`
-        :global(.target.docs-anchor-target) {
-          margin-top: -208px;
-          padding-top: 208px;
-        }
         // only show in mobile mode
         @media screen and (min-width: 640px) {
           .dropdown-toggle {

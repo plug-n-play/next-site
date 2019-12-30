@@ -13,18 +13,13 @@ function Page({ title, description, children }) {
     <div>
       <Head>
         <title>{title || 'Next.js - The React Framework'}</title>
-        <meta
-          name="description"
-          content={description || 'Next.js is the React framework for production'}
-        />
+        {description !== false && (
+          <meta
+            name="description"
+            content={description || 'Next.js is the React framework for production'}
+          />
+        )}
       </Head>
-      <style jsx>
-        {`
-           {
-            overflow-x: hidden;
-          }
-        `}
-      </style>
       <style jsx global>
         {`
           html {

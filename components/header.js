@@ -1,18 +1,17 @@
-import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { useAmp } from 'next/amp';
 
 export default function Header(props) {
-  const { height, shadow, zIndex, background, defaultActive, dotBackground, children } = props;
+  const { shadow, height = 0, defaultActive, zIndex, background, dotBackground, children } = props;
   const isAmp = useAmp();
 
   const desktopHeight = height.desktop || Number(height) || 0;
   const mobileHeight = height.mobile || desktopHeight;
   const tabletHeight = height.tablet || desktopHeight;
 
-  const desktopShadow = shadow.desktop || (typeof shadow === 'boolean' ? shadow : false);
-  const tabletShadow = shadow.tablet || (typeof shadow === 'boolean' ? shadow : false);
-  const mobileShadow = shadow.mobile || (typeof shadow === 'boolean' ? shadow : false);
+  const desktopShadow = typeof shadow === 'boolean' ? shadow : (shadow && shadow.desktop) || false;
+  const tabletShadow = typeof shadow === 'boolean' ? shadow : (shadow && shadow.tablet) || false;
+  const mobileShadow = typeof shadow === 'boolean' ? shadow : (shadow && shadow.mobile) || false;
 
   return (
     <header>
@@ -26,24 +25,21 @@ export default function Header(props) {
       <style jsx>
         {`
           header {
+            top: ${defaultActive ? 0 : -desktopHeight}px;
             left: 0;
             width: 100%;
-            height: ${desktopHeight}px;
             ${isAmp ? '' : 'position: -webkit-sticky;'}
             position: sticky;
-            top: ${defaultActive ? 0 : -desktopHeight}px;
             z-index: ${zIndex || 1000};
           }
-          @media screen and (max-width: 960px) {
+          @media screen and (max-width: 950px) {
             header {
-              height: ${tabletHeight}px;
-              top: ${defaultActive ? 0 : -tabletHeight}px;
+              top: ${-tabletHeight}px;
             }
           }
           @media screen and (max-width: 640px) {
             header {
-              height: ${mobileHeight}px;
-              top: ${defaultActive ? 0 : -mobileHeight}px;
+              top: ${-mobileHeight}px;
             }
           }
           .fixed-container {
@@ -68,7 +64,7 @@ export default function Header(props) {
             box-shadow: ${desktopShadow ? '0px 6px 20px rgba(0, 0, 0, 0.06)' : 'unset'};
             pointer-events: auto;
           }
-          @media screen and (max-width: 960px) {
+          @media screen and (max-width: 950px) {
             .active {
               box-shadow: ${tabletShadow ? '0px 6px 20px rgba(0, 0, 0, 0.06)' : 'unset'};
             }
