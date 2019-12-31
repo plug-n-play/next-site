@@ -21,6 +21,8 @@ export default function SidebarMobile({ children }) {
     if (opened) closeMenu();
     else openMenu();
   };
+  // In the following events, only do updates, don't use local states that aren't shared
+  // with the Search component, because they won't be updated once the event happens.
   const onSearchStart = () => {
     disableBodyScroll(searchRef.current);
     closeMenu();
@@ -29,7 +31,7 @@ export default function SidebarMobile({ children }) {
     enableBodyScroll(searchRef.current);
   };
   const onRouteChange = () => {
-    if (opened) closeMenu();
+    closeMenu();
   };
 
   return (
