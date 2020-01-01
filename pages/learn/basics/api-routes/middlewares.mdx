@@ -60,8 +60,10 @@ export default function Index() {
     `/api/randomQuote${query.author ? '?author=' + query.author : ''}`,
     fetcher
   );
-  const author = data && data.author;
-  let quote = data && data.quote;
+  // The following line has optional chaining, added in Next.js v9.1.5,
+  // is the same as `data && data.author`
+  const author = data?.data.author;
+  let quote = data?.data.quote;
 
   if (!data) quote = 'Loading...';
   if (error) quote = 'Failed to fetch the quote.';
@@ -100,7 +102,7 @@ Let's focus on the following change:
 ```jsx
 const { query } = useRouter();
 const { data, error } = useSWR(
-  query.author ? `/api/randomQuote?author=${query.author}` : '/api/randomQuote',
+  `/api/randomQuote${query.author ? '?author=' + query.author : ''}`,
   fetcher
 );
 ```
