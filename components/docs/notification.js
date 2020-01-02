@@ -4,7 +4,8 @@ export default function Notification({ marginTop, mobileWidth, children }) {
       {children}
       <style jsx>{`
         .notification {
-          padding: 0.5rem 1rem;
+          min-height: 2.5rem;
+          padding: 0.375rem 1rem;
           margin-top: ${marginTop || '1.5rem'};
           border: 1px solid #d8d8d8;
           border-radius: 5px;

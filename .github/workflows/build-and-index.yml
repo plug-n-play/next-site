@@ -9,11 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Install
+      - name: Install and Build
         uses: docker://mhart/alpine-node:10
         with:
           entrypoint: sh
-          args: -c "yarn install"
+          args: -c "yarn install && yarn build"
       - name: Index Docs
         uses: docker://mhart/alpine-node:10
         env:

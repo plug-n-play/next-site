@@ -62,20 +62,19 @@ export default class extends PureComponent {
               </button>
             );
           })}
-          <span className="not-mobile">
-            <Popover content={<div style={{ whiteSpace: 'nowrap' }}>Share your website!</div>}>
-              <a
-                href={SUBMIT_URL}
-                aria-label="Submit Your Website"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <span className="tab f5" style={{ verticalAlign: 'top' }}>
-                  <HeartIcon />
-                </span>
-              </a>
-            </Popover>
-          </span>
+          <Popover content={<div style={{ whiteSpace: 'nowrap' }}>Share your website!</div>}>
+            <a
+              href={SUBMIT_URL}
+              className="not-mobile"
+              aria-label="Submit Your Website"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <span className="tab f5" style={{ verticalAlign: 'top' }}>
+                <HeartIcon />
+              </span>
+            </a>
+          </Popover>
         </div>
         <style jsx>{`
           .categories {

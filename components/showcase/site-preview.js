@@ -78,7 +78,8 @@ export default withRouter(
                 bottom: ${GAP_Y / 2}px;
                 left: ${GAP_X / 2}px;
                 right: ${GAP_X / 2}px;
-                ${src ? `background-image: url(${src});` : ''} background-size: cover;
+                background-image: ${src ? `url(${src})` : 'none'};
+                background-size: cover;
                 background-position: center top;
                 background-repeat: no-repeat;
                 box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.02);

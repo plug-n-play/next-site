@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Error from 'next/error';
+import matter from 'gray-matter';
 import { getSlug, removeFromLast } from '../../lib/docs/utils';
 import { getPaths, findRouteByPath, fetchDocsManifest } from '../../lib/docs/page';
+import { getRawFileFromRepo } from '../../lib/github';
+import markdownToHtml from '../../lib/docs/markdown-to-html';
 import PageContent from '../../components/page-content';
 import Header from '../../components/header';
 import Navbar from '../../components/navbar';
@@ -10,9 +13,6 @@ import Container from '../../components/container';
 import DocsPage from '../../components/docs/docs-page';
 import SocialMeta from '../../components/social-meta';
 import { Sidebar, SidebarMobile, Post, Category, Heading } from '../../components/sidebar';
-import { getRawFileFromRepo } from '../../lib/github';
-import matter from 'gray-matter';
-import markdownToHtml from '../../lib/docs/markdown-to-html';
 import Page from '../../components/page';
 
 // These hashes don't need to be redirected to the olds docs because they are covered
@@ -107,6 +107,7 @@ const Docs = ({ routes, route, data, html }) => {
               margin-top: 2rem;
               margin-bottom: 5rem;
             }
+            /* Remove the top margin of the first heading in the sidebar */
             :global(.heading:first-child > h4) {
               margin-top: 0;
             }

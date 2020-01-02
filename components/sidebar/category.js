@@ -1,21 +1,32 @@
-import { useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import cn from 'classnames';
 import ArrowRightSidebar from '../icons/arrow-right-sidebar';
 
 export default function Category({ level = 1, title, selected, opened, children }) {
-  const [toggle, setToggle] = useState(selected || opened);
-  const toggleCategory = () => setToggle(!toggle);
+  const ref = useRef();
+  const [{ toggle, shouldScroll = false }, setToggle] = useState({ toggle: selected || opened });
+  const toggleCategory = () => {
+    setToggle({ toggle: !toggle, shouldScroll: true });
+  };
   const levelClass = `level-${level}`;
 
   // If a category is selected indirectly, open it. This can happen when using the search input
   useEffect(() => {
     if (selected) {
-      setToggle(true);
+      setToggle({ toggle: true });
     }
   }, [selected]);
 
+  // Navigate to the start of the category when manually opened
+  useEffect(() => {
+    if (toggle && shouldScroll) {
+      ref.current.scrollIntoView();
+      setToggle({ toggle });
+    }
+  }, [toggle, shouldScroll]);
+
   return (
-    <div className={cn('category', levelClass, { open: toggle, selected })}>
+    <div ref={ref} className={cn('category', levelClass, { open: toggle, selected })}>
       <a className="label" onClick={toggleCategory}>
         <ArrowRightSidebar fill="#999" />
         {title}

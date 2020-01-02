@@ -35,7 +35,7 @@ function Showcase({ item }) {
           <>
             <Header
               height={{
-                desktop: 192
+                desktop: 288 - 114
               }}
               shadow
             >
