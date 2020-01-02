@@ -62,8 +62,8 @@ export default function Index() {
   );
   // The following line has optional chaining, added in Next.js v9.1.5,
   // is the same as `data && data.author`
-  const author = data?.data.author;
-  let quote = data?.data.quote;
+  const author = data?.author;
+  let quote = data?.quote;
 
   if (!data) quote = 'Loading...';
   if (error) quote = 'Failed to fetch the quote.';
