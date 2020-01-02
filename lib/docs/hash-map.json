@@ -9,6 +9,29 @@
     "automatic-code-splitting"
   ],
   "redirects": {
-    "css": "/basic-features/built-in-css-support"
+    "css": "/basic-features/built-in-css-support",
+    "built-in-css-support": "/basic-features/built-in-css-support",
+    "css-in-js": "/basic-features/built-in-css-support#css-in-js",
+    "importing-css--sass--less--stylus-files": "/basic-features/built-in-css-support#css-plugins",
+    "static-file-serving-eg-images": "/basic-features/static-file-serving",
+    "dynamic-routing": "/routing/dynamic-routes",
+    "populating-head": "/api-reference/next/head",    
+    "fetching-data-and-component-lifecycle": "/api-reference/data-fetching/getInitialProps",
+    "routing": "/api-routes/introduction",
+    "with-link": "/api-reference/next/link",
+    "basic-example": "/api-reference/next/link",  
+    "custom-routes-using-props-from-url": "/routing/dynamic-routes",
+    "with-url-object": "/api-reference/next/link#with-url-object",
+    "replace-instead-of-push-url": "/api-reference/next/link#replace-the-url-instead-of-push",
+    "using-a-component-that-supports-onclick": "/api-reference/next/link#using-a-component-that-supports-onclick",
+    "forcing-the-link-to-expose-href-to-its-child": "/api-reference/next/link#forcing-link-to-expose-href-to-its-child",
+    "disabling-the-scroll-changes-to-top-on-page": "/api-reference/next/link#disable-scrolling-to-the-top-of-the-page",
+    "imperatively": "/routing/imperatively",  
+    "intercepting-popstate": "/api-reference/next/router#routerbeforepopstate",  
+    "with-url-object-1": "/api-reference/next/router#with-url-object",
+    "router-events": "/api-reference/next/router#routerevents",
+    "shallow-routing": "/routing/shallow-routing",
+    "useRouter": "/api-reference/next/router#userouter",
+    "using-a-higher-order-component": "/api-reference/next/router#withrouter"
   }
 }
