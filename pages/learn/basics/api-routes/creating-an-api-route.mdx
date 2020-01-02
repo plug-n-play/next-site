@@ -8,11 +8,11 @@ export const meta = {
   question: {
     answers: [
       'There is nothing but a white screen.',
-      'A JSON with a quote displayed.',
+      'a JSON string with a quote displayed.',
       "There's an error with 404 - File Not Found.",
       "There's an error with 500 - Internal Error."
     ],
-    correctAnswer: 'A JSON with a quote displayed.'
+    correctAnswer: 'a JSON string with a quote displayed.'
   }
 };
 
@@ -33,7 +33,7 @@ export default (req, res) => {
 };
 ```
 
-The above API route returns a json with a quote and its author, `res.status` and `res.json` are custom [response helpers](https://github.com/zeit/next.js#helper-functions) added by Next.js.
+The above API route returns a JSON string with a quote and its author, `res.status` and `res.json` are custom [response helpers](https://github.com/zeit/next.js#helper-functions) added by Next.js.
 
 Now open your browser and go to http://localhost:3000/api/randomQuote.
 

@@ -42,9 +42,9 @@ export default (req, res) => {
 };
 ```
 
-The above code reads `author` from the `req.query` object and filters the quotes accordingly. If an author is not found quotes from unknown authors are used.
+The above code reads `author` from the `req.query` object and filters the quotes accordingly. If an author is not found, quotes from unknown authors are used.
 
-Now Let's update our page to handle a filter by author. Open `pages/index.js` and replace its content with the following:
+Now Let's update our page to handle filtering by author. Open `pages/index.js` and replace its content with the following:
 
 ```jsx
 import { useRouter } from 'next/router';
@@ -57,11 +57,13 @@ function fetcher(url) {
 export default function Index() {
   const { query } = useRouter();
   const { data, error } = useSWR(
-    query.author ? `/api/randomQuote?author=${query.author}` : '/api/randomQuote',
+    `/api/randomQuote${query.author ? '?author=' + query.author : ''}`,
     fetcher
   );
-  const author = data && data.author;
-  let quote = data && data.quote;
+  // The following line has optional chaining, added in Next.js v9.1.5,
+  // is the same as `data && data.author`
+  const author = data?.data.author;
+  let quote = data?.data.quote;
 
   if (!data) quote = 'Loading...';
   if (error) quote = 'Failed to fetch the quote.';
@@ -100,13 +102,13 @@ Let's focus on the following change:
 ```jsx
 const { query } = useRouter();
 const { data, error } = useSWR(
-  query.author ? `/api/randomQuote?author=${query.author}` : '/api/randomQuote',
+  `/api/randomQuote${query.author ? '?author=' + query.author : ''}`,
   fetcher
 );
 ```
 
 We're sending the `author` from the `query` object received by the index page (`/`) to the API route, which will then return the filtered quotes.
 
-Now go to http://localhost:3000/?author=rauch and refresh the page multiple times, what can you notice?
+Now go to http://localhost:3000/?author=rauch and refresh the page multiple times, what do you notice?
 
 export default ({ children }) => <Layout meta={meta}>{children}</Layout>;
