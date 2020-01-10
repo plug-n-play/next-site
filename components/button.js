@@ -3,10 +3,14 @@ import classNames from 'classnames';
 import css from 'styled-jsx/css';
 
 import withPure from './hoc/pure';
+import LoadingDots from './loading-dots';
 
 const cachedStyles = css`
   .btn {
-    display: inline-block;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     text-decoration: none;
     padding: 0.25rem 0.5rem;
@@ -18,6 +22,7 @@ const cachedStyles = css`
     font-size: inherit;
     line-height: inherit;
     transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
   }
   .btn:hover {
     color: #0070f3;
@@ -40,20 +45,56 @@ const cachedStyles = css`
   .btn.invert:active {
     background: #006ae6;
   }
+  .btn.small {
+    font-size: 0.875rem;
+    height: 1.5rem;
+    padding: 0 0.75rem;
+    line-height: inherit;
+    border-radius: 5px;
+  }
+  .btn.loading {
+    background: #fafafa;
+    color: #888888;
+    border: 1px solid #000;
+    border-color: #eaeaea;
+    box-shadow: none;
+    cursor: default;
+    pointer-events: none;
+  }
+  .btn.loading > .text {
+    visibility: hidden;
+  }
+  .btn > .loading-dots {
+    position: absolute;
+  }
 `;
-export default withPure(function Button({ children, invert, href, as, className, amp, ...props }) {
+
+export default withPure(function Button({
+  children,
+  invert,
+  small,
+  href,
+  as,
+  className,
+  amp,
+  loading,
+  ...props
+}) {
   const cachedClassNames = classNames(className, 'btn', 'fw4 no-drag', {
-    invert
+    invert,
+    small,
+    loading
   });
-  const isExternal = href && href.startsWith('http');
-  const a = (
-    <a className={cachedClassNames} href={href} {...props}>
-      {children}
-      <style jsx>{cachedStyles}</style>
-    </a>
-  );
 
   if (href) {
+    const isExternal = href && href.startsWith('http');
+    const a = (
+      <a className={cachedClassNames} href={href} {...props}>
+        {children}
+        <style jsx>{cachedStyles}</style>
+      </a>
+    );
+
     return amp || isExternal ? (
       a
     ) : (
@@ -65,7 +106,12 @@ export default withPure(function Button({ children, invert, href, as, className,
 
   return (
     <button type="button" className={cachedClassNames} {...props}>
-      {children}
+      <span className="text">{children}</span>
+      {loading && (
+        <span className="loading-dots">
+          <LoadingDots size={4} />
+        </span>
+      )}
       <style jsx>{cachedStyles}</style>
     </button>
   );

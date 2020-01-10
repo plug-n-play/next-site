@@ -1,0 +1,81 @@
+import Layout from '../../../../components/learn/Layout';
+
+export const meta = {
+  title: 'API Routes',
+  courseId: 'basics',
+  lessonId: 'api-routes',
+  stepId: 'fetching-api-routes'
+};
+
+## Fetching API Routes
+
+Congratulations. You have successfully created your first API route!
+
+Now, let's use random quotes instead of the single quote we currently have. For that we're going to use the quotes inside `quotes.json`.
+
+Open `pages/api/randomQuote.js` and replace its content with the following:
+
+```js
+import quotes from '../../quotes.json';
+
+export default (req, res) => {
+  const quote = quotes[Math.floor(Math.random() * quotes.length)];
+  res.status(200).json(quote);
+};
+```
+
+And now let's consume our API and display the random quote in a page.
+
+Open `pages/index.js` and replace its content with the following:
+
+```jsx
+import useSWR from 'swr';
+
+function fetcher(url) {
+  return fetch(url).then(r => r.json());
+}
+
+export default function Index() {
+  const { data, error } = useSWR('/api/randomQuote', fetcher);
+  // The following line has optional chaining, added in Next.js v9.1.5,
+  // is the same as `data && data.author`
+  const author = data?.author;
+  let quote = data?.quote;
+
+  if (!data) quote = 'Loading...';
+  if (error) quote = 'Failed to fetch the quote.';
+
+  return (
+    <main className="center">
+      <div className="quote">{quote}</div>
+      {author && <span className="author">- {author}</span>}
+
+      <style jsx>{`
+        main {
+          width: 90%;
+          max-width: 900px;
+          margin: 300px auto;
+          text-align: center;
+        }
+        .quote {
+          font-family: cursive;
+          color: #e243de;
+          font-size: 24px;
+          padding-bottom: 10px;
+        }
+        .author {
+          font-family: sans-serif;
+          color: #559834;
+          font-size: 20px;
+        }
+      `}</style>
+    </main>
+  );
+}
+```
+
+In your browser, open http://localhost:3000 and you'll be able to see a random quote from the API, and you can refresh the page to update the quote.
+
+We're using a package called [SWR](https://github.com/zeit/swr) to fetch our API, it's a React Hook for remote data fetching. You can learn more about it [here](https://swr.now.sh/).
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>;

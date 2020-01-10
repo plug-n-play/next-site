@@ -1,0 +1,42 @@
+import Layout from '../../../../components/learn/Layout';
+
+export const meta = {
+  title: 'API Routes',
+  courseId: 'basics',
+  lessonId: 'api-routes',
+  stepId: 'creating-an-api-route',
+  question: {
+    answers: [
+      'There is nothing but a white screen.',
+      'A JSON string with a quote displayed.',
+      "There's an error with 404 - File Not Found.",
+      "There's an error with 500 - Internal Error."
+    ],
+    correctAnswer: 'A JSON string with a quote displayed.'
+  }
+};
+
+## Creating an API route
+
+API Routes are lambdas (a.k.a serverless functions) running on Node.
+
+In Next.js every file inside `pages/api` is an API Route, that way we can distinguish between a lambda and a React Component.
+
+Let's start by creating a file called `pages/api/randomQuote.js`. Then open it and add the following content:
+
+```js
+export default (req, res) => {
+  res.status(200).json({
+    quote: 'Write tests, not too many, mostly integration',
+    author: 'Guillermo Rauch'
+  });
+};
+```
+
+The above API route returns a JSON string with a quote and its author, `res.status` and `res.json` are custom [response helpers](https://github.com/zeit/next.js#helper-functions) added by Next.js.
+
+Now open your browser and go to http://localhost:3000/api/randomQuote.
+
+What do you see in the browser?
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>;

@@ -42,12 +42,12 @@ export default props => {
   const component = props.children;
   const children = component.props.children || '';
 
-  let id = props.id;
+  let { id } = props;
   let text = children;
 
   const slugger = new GithubSlugger();
 
-  if (null == id) {
+  if (id == null) {
     // If there are sub components, convert them to text
     if (Array.isArray(children)) {
       text = children
@@ -61,11 +61,11 @@ export default props => {
   }
 
   const targetStyle =
-    null != offsetTop ? { marginTop: -offsetTop + 'px', paddingTop: offsetTop + 'px' } : null;
+    offsetTop != null ? { marginTop: `${-offsetTop}px`, paddingTop: `${offsetTop}px` } : null;
   return (
     <Heading className={props.lean ? 'lean' : ''} component={component} data-components-heading>
       <span id={id} className="target docs-anchor-target" style={targetStyle} />
-      <a href={'#' + id}>{children}</a>
+      <a href={`#${id}`}>{children}</a>
       <span className="permalink">
         <PermalinkIcon />
       </span>
@@ -110,8 +110,8 @@ export default props => {
 
           .target {
             display: block;
-            margin-top: -128px;
-            padding-top: 128px;
+            margin-top: -160px;
+            padding-top: 160px;
             visibility: hidden;
             position: absolute;
           }

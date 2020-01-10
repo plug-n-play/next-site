@@ -12,49 +12,65 @@ export default function Documentation({ children, headings }) {
     <>
       <Head title="Getting Started" />
 
+      <div className="notification-container">
+        <Notification isFixed mobileWidth="640px">
+          <strong>Note:</strong> You are viewing the old Next.js documentation. For the latest
+          features and a better experience please see{' '}
+          <a href="/docs/getting-started">the new docs</a>.
+        </Notification>
+      </div>
+
       <div className="documentation">
         <Sidebar headings={headings} desktop />
         <div className="documentation__container">
-          <Notification marginTop="3rem" mobileWidth="640px">
-            <strong>Note:</strong> You are viewing the old Next.js documentation. For the latest
-            features and a better experience please see{' '}
-            <a href="/docs/getting-started">the new docs</a>.
-          </Notification>
           <div className="documentation__content">{children}</div>
         </div>
-
-        <style jsx>{`
-          .documentation {
-            display: flex;
-            padding-top: 50px;
-          }
-          @media screen and (max-width: 640px) {
-            .documentation {
-              display: block;
-              padding-top: 25px;
-            }
-          }
-          .documentation__sidebar {
-            display: flex;
-            flex-direction: column;
-          }
-
-          .documentation__container {
-            flex: 1;
-            padding-bottom: 5rem;
-            overflow: hidden;
-          }
-
-          .documentation__header h1 {
-            margin-top: 0;
-          }
-
-          .documentation__content {
-            width: 100%;
-            max-width: 600px;
-          }
-        `}</style>
       </div>
+
+      <style jsx>{`
+        .notification-container {
+          position: fixed;
+          background: #fff;
+        }
+        .documentation {
+          display: flex;
+          padding-top: calc(55px + 2rem);
+        }
+        @media screen and (max-width: 960px) {
+          .notification-container {
+            padding-right: 2rem;
+          }
+        }
+        @media screen and (max-width: 640px) {
+          .notification-container {
+            position: static;
+            padding-right: 0;
+          }
+          .documentation {
+            display: block;
+            padding-top: 0;
+          }
+        }
+        .documentation__sidebar {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .documentation__container {
+          flex: 1;
+          padding-bottom: 5rem;
+          overflow: hidden;
+        }
+
+        .documentation__header h1 {
+          margin-top: 0;
+        }
+
+        .documentation__content {
+          width: 100%;
+          max-width: 600px;
+        }
+      `}</style>
     </>
   );
 }

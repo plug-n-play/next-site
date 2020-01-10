@@ -64,11 +64,12 @@ const Code = ({ children }) => (
     <code>{children}</code>
     <style jsx>{`
       pre {
-        padding: 1.25rem;
-        margin: 40px 0;
-        border: 1px solid #eaeaea;
+        background: #1d1f21;
         white-space: pre;
         overflow: auto;
+        padding: 1.5rem;
+        margin: 40px 0;
+        border-radius: 5px;
         -webkit-overflow-scrolling: touch;
       }
       pre code {

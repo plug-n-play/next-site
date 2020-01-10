@@ -79,6 +79,7 @@ export default () => {
           .showcase-container.desktop {
             display: none;
             margin: 4rem auto 2rem auto;
+            overflow-x: hidden;
           }
           .slides {
             display: flex;

@@ -1,0 +1,29 @@
+import Layout from '../../../../components/learn/Layout';
+
+export const meta = {
+  title: 'API Routes',
+  courseId: 'basics',
+  lessonId: 'api-routes',
+  stepId: 'setup'
+};
+
+## Setup
+
+First of all, we need a simple Next.js app to play with. Clone the following example app:
+
+```bash
+git clone https://github.com/zeit/next-learn-demo.git
+cd next-learn-demo
+cd 7.2-api-routes
+```
+
+You can run it with:
+
+```bash
+npm install
+npm run dev
+```
+
+Now you can access the app by navigating to http://localhost:3000.
+
+export default ({ children }) => <Layout meta={meta}>{children}</Layout>;
